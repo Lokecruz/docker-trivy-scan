@@ -8,15 +8,15 @@ pipeline {
             }
         }
 
-        stage('Scan Image') {
+        stage('Check Trivy') {
             steps {
-                bat 'trivy image simple-node-app'
+                bat 'trivy --version'
             }
         }
 
-        stage('Run Container') {
+        stage('Scan Image') {
             steps {
-                bat 'docker run -d --name simple-node-app -p 8081:8080 simple-node-app'
+                bat 'trivy image simple-node-app'
             }
         }
     }
