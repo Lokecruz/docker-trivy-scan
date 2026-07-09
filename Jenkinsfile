@@ -18,7 +18,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 bat '''
-                docker build -t $IMAGE_NAME:$IMAGE_TAG .
+                docker build -t %IMAGE_NAME:%IMAGE_TAG .
                 '''
             }
         }
@@ -29,7 +29,7 @@ pipeline {
                 trivy image \
                   --scanners vuln \
                   --severity HIGH,CRITICAL \
-                  $IMAGE_NAME:$IMAGE_TAG
+                  %IMAGE_NAME:%IMAGE_TAG
                 '''
             }
         }
